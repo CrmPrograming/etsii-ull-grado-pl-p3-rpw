@@ -3,23 +3,23 @@
 $(document).ready(function() {
    $("#fileinput").change(calculate); 
 }); 
- 
+
 function generateOutput(contents) { 
-  return contents.replace(/____________________/__,'__________________________________'); 
+  //return contents.replace(/____________________/__,'__________________________________'); 
+  
 } 
- 
+
+
 function calculate(evt) { 
   var f = evt.target.files[0];  
   var contents = ''; 
-  alert("Wooo");
  
   if (f) { 
-    alert("Wiiii");
     var r = new FileReader(); 
     r.onload = function(e) {  
       contents = e.target.result;
-      alert(contents);
       var escaped  = escapeHtml(contents); 
+	  alert(escaped);
       var outdiv = document.getElementById("out"); 
       outdiv.className = 'unhidden'; 
       finaloutput.innerHTML = generateOutput(escaped); 
@@ -31,7 +31,7 @@ function calculate(evt) {
     alert("Failed to load file"); 
   } 
 } 
- 
+
 var entityMap = { 
     "&": "&amp;", 
     "<": "&lt;", 
@@ -39,10 +39,10 @@ var entityMap = {
     '"': '&quot;', 
     "'": '&#39;', 
     "/": '&#x2F;' 
-  }; 
- 
+}; 
+   
 function escapeHtml(string) { 
-  return String(string).replace(/_________/g, function (s) { 
-    return ____________; 
+  return String(string).replace(/&|<|>|"|'|\//g, function (s) { 
+    return entityMap[s]; 
   });
 }
