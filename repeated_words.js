@@ -5,7 +5,7 @@ $(document).ready(function() {
 }); 
 
 function generateOutput(contents) { 
-  return contents.replace(/\W(\w+)\W(\1)/g,' $2'); 
+  return contents.replace(/\b([a-z_A-Z]\w*)(\s+)\1\b/ig,'<span class="repeated">$1</span>$2'); 
   
 } 
 
@@ -42,7 +42,7 @@ var entityMap = {
 }; 
    
 function escapeHtml(string) { 
-  return String(string).replace(/&|<|>|"|'|\//g, function (s) { 
+  return String(string).replace(/[&<>\/'"]/g, function (s) { 
     return entityMap[s]; 
   });
 }
